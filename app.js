@@ -42,7 +42,7 @@ client.on('connect', function (connection) {
             // use xor to turn off flags
             buffer[0] = buffer[0] ^ deskLightMask;
 
-            buffer[0] = Math.floor(Math.random() * Math.floor(255));
+            buffer[0] = Math.floor(Math.random() * Math.floor(10));
 
             connection.sendBytes(buffer);
             setTimeout(sendNumber, 2000);
