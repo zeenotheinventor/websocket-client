@@ -15,7 +15,8 @@ client.on('connect', function (connection) {
         console.log('echo-protocol Connection Closed');
     });
     connection.on('message', function (message) {
-        console.log(message.binaryData)
+        console.log((message.binaryData[0] >>> 0).toString(2));
+
         if (message.type === 'utf8') {
             console.log("Server sent: '" + message.utf8Data + "'");
         }
