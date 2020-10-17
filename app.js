@@ -15,10 +15,14 @@ client.on('connect', function (connection) {
         console.log('echo-protocol Connection Closed');
     });
     connection.on('message', function (message) {
-        console.log((message.binaryData[0] >>> 0).toString(2));
 
         if (message.type === 'utf8') {
             console.log("Server sent: '" + message.utf8Data + "'");
+        }
+
+        if (message.type === 'binary') {
+
+            console.log((message.binaryData[0] >>> 0).toString(2));
         }
     });
 
@@ -36,10 +40,12 @@ client.on('connect', function (connection) {
             buffer[0] = buffer[0] | musicMask;
 
             // use xor to turn off flags
-            // buffer[0] = buffer[0] ^ deskLightMask;
+            buffer[0] = buffer[0] ^ deskLightMask;
+
+            buffer[0] = Math.floor(Math.random() * Math.floor(255));
 
             connection.sendBytes(buffer);
-            setTimeout(sendNumber, 10000);
+            setTimeout(sendNumber, 2000);
         }
     }
     sendNumber();
